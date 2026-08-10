@@ -1,5 +1,12 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Fraunces, Cambay, DM_Sans } from "next/font/google";
+import {
+  Geist,
+  Geist_Mono,
+  Fraunces,
+  Cambay,
+  DM_Sans,
+  Great_Vibes,
+} from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import "./globals.css";
@@ -30,6 +37,13 @@ const dmSans = DM_Sans({
   subsets: ["latin"],
 });
 
+/** Script face used for the "TH" in the 50th Anniversary hero slide. */
+const greatVibes = Great_Vibes({
+  variable: "--font-script",
+  weight: "400",
+  subsets: ["latin"],
+});
+
 export const metadata: Metadata = {
   title: "Awabakal",
   description: "Awabakal home page",
@@ -39,7 +53,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${fraunces.variable} ${cambay.variable} ${dmSans.variable} antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${fraunces.variable} ${cambay.variable} ${dmSans.variable} ${greatVibes.variable} antialiased`}
     >
       <body className="relative">
         <Header />

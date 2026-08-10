@@ -1,3 +1,5 @@
+import Dot from "@/components/ui/Dot";
+
 export default function Badge({
   children,
   tone = "light",
@@ -13,7 +15,7 @@ export default function Badge({
           : "bg-white/10 text-white"
       }`}
     >
-      <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+      <Dot size={6} />
       {children}
     </span>
   );
