@@ -144,7 +144,7 @@ export default function Hero() {
           {SLIDES[index].eyebrow && (
             <span className="mb-[28px] inline-flex items-center gap-[10px] rounded-[100px] border border-solid border-[#561358] bg-[#918F91] px-[18px] py-[8px] text-[14px] text-[#561358]">
               <Dot size={12} />
-              {SLIDES[index].eyebrow}
+              {SLIDES[index].eyebrow}    
             </span>
           )}
 

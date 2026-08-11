@@ -1,6 +1,5 @@
 import Hero from "@/components/Hero";
 import Services from "@/components/Services";
-import DotDivider from "@/components/DotDivider";
 import AboutUs from "@/components/AboutUs";
 import OurValues from "@/components/OurValues";
 import WeEmpower from "@/components/WeEmpower";
@@ -16,7 +15,6 @@ export default function Home() {
     <>
       <Hero />
       <Services />
-      <DotDivider />
       <AboutUs />
       <OurValues />
       <WeEmpower />
