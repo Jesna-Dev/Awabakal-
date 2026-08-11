@@ -48,21 +48,39 @@ const values: Value[] = [
 
 const RING = 458.916;
 
+/** Staggers the rings' float so they don't rise and fall in lockstep. */
+const FLOAT_DELAYS = ["", "float-delay-1", "float-delay-2"];
+
 export default function OurValues() {
   return (
-    <section className="bg-brand px-6 py-24 font-cambay lg:px-[60px]">
+    <section className="relative isolate overflow-hidden bg-brand px-6 py-24 font-cambay lg:px-[60px]">
+      {/* wave footage washed back to 9% over the solid brand purple */}
+      <video
+        src="/Wave.mp4"
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        aria-hidden
+        tabIndex={-1}
+        className="pointer-events-none absolute inset-0 -z-10 h-full w-full select-none object-cover opacity-[0.10]"
+      />
+
       <h2 className="mb-[72px] text-center text-[48px] leading-[1.1] text-[#fdfdfd] lg:mb-[96px] lg:text-[64px]">
         Our Values
       </h2>
 
       <div className="mx-auto flex max-w-[1465px] flex-col gap-[48px] md:flex-row md:items-start">
-        {values.map(({ title, description, art }) => (
+        {values.map(({ title, description, art }, i) => (
           <div
             key={title}
             className="flex flex-1 flex-col items-center gap-[62.442px]"
           >
             {/* ring + artwork, scaled together so proportions hold */}
-            <div className="relative aspect-square w-full max-w-[458.916px]">
+            <div
+              className={`float-drift float-slow relative aspect-square w-full max-w-[458.916px] ${FLOAT_DELAYS[i % FLOAT_DELAYS.length]}`}
+            >
               <Image src="/figma/values/ring.svg" alt="" fill className="object-contain" />
               <Image
                 src={art.src}

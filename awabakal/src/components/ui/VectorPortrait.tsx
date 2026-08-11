@@ -11,6 +11,8 @@ type VectorPortraitProps = {
   alt: string;
   /** rendered size in px, used for the image `sizes` hint */
   size: number;
+  /** optional colour wash laid over the photo — include the alpha yourself */
+  overlay?: string;
   className?: string;
 };
 
@@ -23,6 +25,7 @@ export default function VectorPortrait({
   src,
   alt,
   size,
+  overlay,
   className,
 }: VectorPortraitProps) {
   return (
@@ -44,6 +47,15 @@ export default function VectorPortrait({
         className="object-cover"
         style={{ clipPath: `url(#${id})` }}
       />
+
+      {overlay && (
+        // clipped to the same blob so the wash stops at the photo's edge
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0"
+          style={{ background: overlay, clipPath: `url(#${id})` }}
+        />
+      )}
     </div>
   );
 }

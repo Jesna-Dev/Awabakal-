@@ -15,12 +15,21 @@ export default function CtaButton({
   className = "",
 }: CtaButtonProps) {
   const base =
-    "inline-flex items-center justify-center gap-[10px] rounded-[100px] px-[25px] py-[16px] font-dm text-[18px] font-medium transition-colors";
+    "group inline-flex items-center justify-center gap-[10px] rounded-[100px] border border-solid px-[25px] py-[16px] font-dm text-[18px] font-medium transition-[color,background-color,border-color,font-weight] duration-300 ease-in-out hover:font-bold";
 
+  // both variants land on the same hover state: no fill, brand border, brand
+  // label and arrow
   const styles =
     variant === "solid"
-      ? "bg-brand text-white hover:bg-brand-light"
-      : "border border-solid border-brand-light text-brand hover:bg-brand hover:text-white";
+      ? "border-transparent bg-brand text-white hover:border-brand hover:bg-transparent hover:text-brand"
+      : "border-brand-light text-brand hover:border-brand hover:bg-transparent";
+
+  // the arrow is a purple SVG: the solid variant knocks it out to white while
+  // filled, then lets it return to brand purple on hover with the label
+  const arrow =
+    variant === "solid"
+      ? "brightness-0 invert transition-[filter] duration-300 ease-in-out group-hover:brightness-100 group-hover:invert-0"
+      : "";
 
   return (
     <a href={href} className={`${base} ${styles} ${className}`}>
@@ -30,7 +39,7 @@ export default function CtaButton({
         alt=""
         width={19}
         height={12}
-        className="h-[12.114px] w-[19.14px]"
+        className={`h-[12.114px] w-[19.14px] ${arrow}`}
       />
     </a>
   );

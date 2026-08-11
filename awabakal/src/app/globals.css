@@ -111,6 +111,84 @@ body {
   }
 }
 
+/* Gentle vertical drift for decorative vectors and portraits.
+   `.float-delay-*` staggers neighbours so the page doesn't pulse in unison. */
+@keyframes float-drift {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.float-drift {
+  animation: float-drift 3.6s ease-in-out infinite;
+  will-change: transform;
+}
+
+.float-slow {
+  animation-duration: 5.4s;
+}
+
+.float-delay-1 {
+  animation-delay: -0.9s;
+}
+
+.float-delay-2 {
+  animation-delay: -1.8s;
+}
+
+.float-delay-3 {
+  animation-delay: -2.7s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .float-drift {
+    animation: none;
+  }
+}
+
+/* One-shot "sunrise": the circle starts tucked small behind the petal and
+   grows up into place. Scaled from the bottom edge so it clears the petal. */
+@keyframes sun-rise {
+  from {
+    transform: scale(0.12);
+    opacity: 0;
+  }
+  60% {
+    opacity: 1;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* resting state held until the section scrolls into view */
+.sun-rise-init {
+  transform: scale(0.12);
+  transform-origin: center bottom;
+  opacity: 0;
+}
+
+.sun-rise {
+  transform-origin: center bottom;
+  animation: sun-rise 1600ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* skip the motion, but never leave the circle stuck at 12% */
+  .sun-rise-init,
+  .sun-rise {
+    transform: none;
+    opacity: 1;
+    animation: none;
+  }
+}
+
 .dot-pattern {
   background-image: radial-gradient(
     circle,

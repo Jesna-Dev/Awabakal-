@@ -92,7 +92,9 @@ function ServiceCard({
   iconHasCircle,
 }: Service) {
   return (
-    <article className="group relative aspect-[480/646] w-[280px] shrink-0 overflow-hidden rounded-[24px] lg:w-[380px]">
+    // The spacing lives on the card (not as a flex `gap`) so the duplicated
+    // list is exactly half the track's width and the -50% loop is seamless.
+    <article className="group relative mr-[24px] aspect-[480/646] w-[280px] shrink-0 overflow-hidden rounded-[24px] lg:w-[380px]">
       <Image
         src={image}
         alt={title}
@@ -184,11 +186,8 @@ export default function Services() {
           to { transform: translateX(-50%); }
         }
         .services-track {
-          animation: services-marquee 32s linear infinite;
-        }
-        .services-marquee:hover .services-track,
-        .services-marquee:focus-within .services-track {
-          animation-play-state: paused;
+          /* 64s over the doubled travel keeps the original scroll speed */
+          animation: services-marquee 64s linear infinite;
         }
         @media (prefers-reduced-motion: reduce) {
           .services-track { animation: none; }
@@ -208,7 +207,8 @@ export default function Services() {
       />
 
       <div className="relative pt-20 pb-16">
-        <div className="mx-auto max-w-[1840px] px-6 lg:px-[60px]">
+        {/* flush left, matching the hero's left inset on the landing page */}
+        <div className="px-6 lg:px-[90px]">
           <span className="mb-[28px] inline-flex items-center gap-[10px] rounded-[100px] border border-solid border-[#561358] bg-transparent px-[18px] py-[8px] text-[14px] text-[#561358]">
             <Image
               src="/Vector 2534.png"
@@ -225,12 +225,17 @@ export default function Services() {
           </h2>
         </div>
 
-        {/* Cards drift to the left and pause while hovered or keyboard-focused. */}
-        <div className="services-marquee overflow-hidden">
-          <div className="services-track flex w-max gap-[24px] pl-6 lg:pl-[60px]">
-            {[...services, ...services].map((service, i) => (
-              <ServiceCard key={`${service.title}-${i}`} {...service} />
-            ))}
+        {/* Cards drift to the left in an unbroken loop. The list is repeated
+            four times: the animation shifts by half the track, so the two
+            copies left on screen (~3230px) still fill the widest displays
+            instead of running out and leaving a gap before the loop resets. */}
+        <div className="services-marquee overflow-hidden pl-6 lg:pl-[90px]">
+          <div className="services-track flex w-max">
+            {[...services, ...services, ...services, ...services].map(
+              (service, i) => (
+                <ServiceCard key={`${service.title}-${i}`} {...service} />
+              ),
+            )}
           </div>
         </div>
       </div>
@@ -240,9 +245,11 @@ export default function Services() {
         className="relative h-[72px] w-full lg:h-[143px]"
         style={{
           backgroundImage: 'url("/figma/services/round-element.svg")',
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center bottom",
-          backgroundSize: "100% 100%",
+          // tiles across the viewport at its natural aspect instead of being
+          // stretched to fit, so the spiral motif fills any screen width
+          backgroundRepeat: "repeat-x",
+          backgroundPosition: "left bottom",
+          backgroundSize: "auto 100%",
         }}
       />
     </section>
