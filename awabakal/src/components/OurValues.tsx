@@ -51,6 +51,10 @@ const RING = 458.916;
 export default function OurValues() {
   return (
     <section className="bg-brand px-6 py-24 font-cambay lg:px-[60px]">
+      <h2 className="mb-[72px] text-center text-[48px] leading-[1.1] text-[#fdfdfd] lg:mb-[96px] lg:text-[64px]">
+        Our Values
+      </h2>
+
       <div className="mx-auto flex max-w-[1465px] flex-col gap-[48px] md:flex-row md:items-start">
         {values.map(({ title, description, art }) => (
           <div
