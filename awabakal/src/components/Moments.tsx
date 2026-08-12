@@ -1,50 +1,22 @@
 import Image from "next/image";
 
-/** The two petal strokes from `public/petal.svg`, drawn as outline. */
-const PETAL_PATHS = [
-  "M241.12 239.779C223.235 50.9681 78.6699 4.11837 4.17017 4.00022C1.87596 3.99659 0.15301 6.05418 0.354834 8.33949C18.7945 217.137 196.554 243.272 237.358 244.058C239.648 244.102 241.336 242.058 241.12 239.779Z",
-  "M279.305 241.15C468.532 228.394 519.286 85.1533 521.426 10.6843C521.492 8.39099 519.481 6.61285 517.192 6.75259C307.971 19.5205 277.022 196.505 275.129 237.274C275.023 239.561 277.02 241.304 279.305 241.15Z",
-];
-
 type Tile =
   | { kind: "photo"; src: string; alt: string }
-  | { kind: "icon"; src: string; alt: string };
+  | { kind: "icon"; src: string; alt: string; gif: string };
 
 /**
  * Alternating photo / icon tiles, matching the Figma `scroll` row: a rounded
- * square photo, then a circle holding a purple-washed photo behind the petal
- * mark.
+ * square photo, then a circle holding a purple-washed photo behind an animated
+ * line-art mark.
  */
 const tiles: Tile[] = [
   { kind: "photo", src: "/hero.jpg", alt: "Community gathering" },
-  { kind: "icon", src: "/healthcarefinal.jpg", alt: "" },
+  { kind: "icon", src: "/healthcarefinal.jpg", alt: "", gif: "/care.gif" },
   { kind: "photo", src: "/images (10).jpg", alt: "Child at a community event" },
-  { kind: "icon", src: "/1123.png", alt: "" },
+  { kind: "icon", src: "/1123.png", alt: "", gif: "/book.gif" },
   { kind: "photo", src: "/Health_.png", alt: "Awabakal health service" },
-  { kind: "icon", src: "/anniversary.png", alt: "" },
+  { kind: "icon", src: "/anniversary.png", alt: "", gif: "/House.gif" },
 ];
-
-/** White petal mark sitting inside the circular tiles. */
-function PetalMark({ className = "" }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 522 248"
-      aria-hidden
-      fill="none"
-      className={`pointer-events-none select-none ${className}`}
-    >
-      {PETAL_PATHS.map((d) => (
-        <path
-          key={d}
-          d={d}
-          stroke="#ffffff"
-          strokeWidth="10"
-          strokeLinejoin="round"
-        />
-      ))}
-    </svg>
-  );
-}
 
 export default function Moments() {
   return (
@@ -134,7 +106,16 @@ export default function Moments() {
                   aria-hidden
                   className="absolute inset-0 bg-brand/70"
                 />
-                <PetalMark className="relative h-[80px] w-[168px] lg:h-[112px] lg:w-[236px]" />
+                {/* animated line-art mark; `unoptimized` keeps the frames */}
+                <Image
+                  src={tile.gif}
+                  alt=""
+                  aria-hidden
+                  unoptimized
+                  width={589}
+                  height={526}
+                  className="relative h-[120px] w-[140px] select-none object-contain lg:h-[170px] lg:w-[200px]"
+                />
               </div>
             ),
           )}
