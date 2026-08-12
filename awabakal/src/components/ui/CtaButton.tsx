@@ -3,8 +3,11 @@ import Image from "next/image";
 type CtaButtonProps = {
   children: React.ReactNode;
   href?: string;
-  /** outline = bordered purple on light bg; solid = filled purple. */
-  variant?: "outline" | "solid";
+  /**
+   * outline = bordered purple on light bg; solid = filled purple;
+   * white = filled white, for use on the dark purple panels.
+   */
+  variant?: "outline" | "solid" | "white";
   className?: string;
 };
 
@@ -17,19 +20,30 @@ export default function CtaButton({
   const base =
     "group inline-flex items-center justify-center gap-[10px] rounded-[100px] border border-solid px-[25px] py-[16px] font-dm text-[18px] font-medium transition-[color,background-color,border-color,font-weight] duration-300 ease-in-out hover:font-bold";
 
-  // both variants land on the same hover state: no fill, brand border, brand
-  // label and arrow
-  const styles =
-    variant === "solid"
-      ? "border-transparent bg-brand text-white hover:border-brand hover:bg-transparent hover:text-brand"
-      : "border-brand-light text-brand hover:border-brand hover:bg-transparent";
+  // Every variant drops its fill on hover and swaps the label + arrow to the
+  // fill colour. `outline` shares the Donation button's exact treatment: it
+  // used to sit transparent at rest, so hovering barely changed anything.
+  const purple =
+    "border-transparent bg-brand text-white hover:border-brand hover:bg-transparent hover:text-brand";
 
-  // the arrow is a purple SVG: the solid variant knocks it out to white while
-  // filled, then lets it return to brand purple on hover with the label
-  const arrow =
-    variant === "solid"
-      ? "brightness-0 invert transition-[filter] duration-300 ease-in-out group-hover:brightness-100 group-hover:invert-0"
-      : "";
+  const styles = {
+    solid: purple,
+    outline: purple,
+    white:
+      "border-transparent bg-white text-brand hover:border-white hover:bg-transparent hover:text-white",
+  }[variant];
+
+  // the arrow artwork is brand purple, so it is knocked out to white whenever
+  // the label is white and released back when the label returns to purple
+  const whiteArrow =
+    "brightness-0 invert transition-[filter] duration-300 ease-in-out group-hover:brightness-100 group-hover:invert-0";
+
+  const arrow = {
+    solid: whiteArrow,
+    outline: whiteArrow,
+    white:
+      "transition-[filter] duration-300 ease-in-out group-hover:brightness-0 group-hover:invert",
+  }[variant];
 
   return (
     <a href={href} className={`${base} ${styles} ${className}`}>

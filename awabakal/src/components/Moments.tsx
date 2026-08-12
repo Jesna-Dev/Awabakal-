@@ -1,4 +1,5 @@
 import Image from "next/image";
+import CtaButton from "@/components/ui/CtaButton";
 
 type Tile =
   | { kind: "photo"; src: string; alt: string }
@@ -10,12 +11,12 @@ type Tile =
  * line-art mark.
  */
 const tiles: Tile[] = [
-  { kind: "photo", src: "/hero.jpg", alt: "Community gathering" },
-  { kind: "icon", src: "/healthcarefinal.jpg", alt: "", gif: "/care.gif" },
-  { kind: "photo", src: "/images (10).jpg", alt: "Child at a community event" },
-  { kind: "icon", src: "/1123.png", alt: "", gif: "/book.gif" },
-  { kind: "photo", src: "/Health_.png", alt: "Awabakal health service" },
-  { kind: "icon", src: "/anniversary.png", alt: "", gif: "/House.gif" },
+  { kind: "photo", src: "/image_1.jpg", alt: "Awabakal community gathering" },
+  { kind: "icon", src: "/image_2.jpg", alt: "", gif: "/care.gif" },
+  { kind: "photo", src: "/image_3.jpg", alt: "Children at an Awabakal event" },
+  { kind: "icon", src: "/image_4.jpg", alt: "", gif: "/book.gif" },
+  { kind: "photo", src: "/image_2.jpg", alt: "Awabakal community program" },
+  { kind: "icon", src: "/image_1.jpg", alt: "", gif: "/House.gif" },
 ];
 
 export default function Moments() {
@@ -50,25 +51,31 @@ export default function Moments() {
       />
 
       {/* ── heading ─────────────────────────────────────────────────── */}
-      <div className="px-6 lg:px-[79px]">
-        <span className="mb-[28px] inline-flex items-center gap-[10px] rounded-[100px] border border-solid border-white/70 px-[18px] py-[8px] text-[15px] text-white">
-          <span className="size-[10px] rounded-full bg-white" aria-hidden />
-          Gallery
-        </span>
+      <div className="flex flex-wrap items-end justify-between gap-8 px-6 lg:px-[79px]">
+        <div>
+          <span className="mb-[28px] inline-flex items-center gap-[10px] rounded-[100px] border border-solid border-white/70 px-[18px] py-[8px] text-[15px] text-white">
+            <span className="size-[10px] rounded-full bg-white" aria-hidden />
+            Gallery
+          </span>
 
-        <h2 className="flex flex-wrap items-center gap-x-6 text-[52px] font-normal leading-[1.1] text-white lg:text-[72px]">
-          Moments
-          {/* the squiggle artwork is red, so it is knocked out to white */}
-          <Image
-            src="/Line 03.gif"
-            alt=""
-            aria-hidden
-            unoptimized
-            width={783}
-            height={129}
-            className="h-[26px] w-[158px] select-none object-contain brightness-0 invert"
-          />
-        </h2>
+          <h2 className="flex flex-wrap items-center gap-x-6 text-[52px] font-normal leading-[1.1] text-white lg:text-[72px]">
+            Moments
+            {/* the squiggle artwork is red, so it is knocked out to white */}
+            <Image
+              src="/Line 03.gif"
+              alt=""
+              aria-hidden
+              unoptimized
+              width={783}
+              height={129}
+              className="h-[26px] w-[158px] select-none object-contain brightness-0 invert"
+            />
+          </h2>
+        </div>
+
+        <CtaButton variant="white" href="#events">
+          View All
+        </CtaButton>
       </div>
 
       {/* ── scrolling row ───────────────────────────────────────────── */}
@@ -106,7 +113,11 @@ export default function Moments() {
                   aria-hidden
                   className="absolute inset-0 bg-brand/70"
                 />
-                {/* animated line-art mark; `unoptimized` keeps the frames */}
+                {/* Animated line-art mark. The three gifs have different
+                    aspect ratios (462x521, 589x419, 524x526), so a square box
+                    plus object-contain gives them all the same footprint
+                    instead of each filling a different amount of it. Drawn at
+                    or below native size so the linework stays sharp. */}
                 <Image
                   src={tile.gif}
                   alt=""
@@ -114,7 +125,7 @@ export default function Moments() {
                   unoptimized
                   width={589}
                   height={526}
-                  className="relative h-[120px] w-[140px] select-none object-contain lg:h-[170px] lg:w-[200px]"
+                  className="relative size-[150px] select-none object-contain lg:size-[220px]"
                 />
               </div>
             ),

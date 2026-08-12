@@ -28,7 +28,8 @@ export default function Footer() {
               />
               <button
                 type="submit"
-                className="shrink-0 rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-accent/90"
+                // same motion as CtaButton: fill drops away over 300ms
+                className="shrink-0 rounded-full border border-solid border-transparent bg-accent px-5 py-2.5 text-sm font-semibold text-white transition-[color,background-color,border-color] duration-300 ease-in-out hover:border-accent hover:bg-transparent hover:text-accent"
               >
                 Subscribe
               </button>

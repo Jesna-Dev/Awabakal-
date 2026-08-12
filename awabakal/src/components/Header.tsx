@@ -32,7 +32,8 @@ export default function Header() {
 
         <a
           href="#contact"
-          className="flex w-[159px] shrink-0 items-center justify-center rounded-[100px] border-[0.2px] border-solid border-[#e9a031] bg-white/19 px-[34px] py-[12px] text-[18px] whitespace-nowrap text-white transition-colors hover:bg-white/30"
+          // same motion as CtaButton: fill drops away over 300ms, label bolds
+          className="flex w-[159px] shrink-0 items-center justify-center rounded-[100px] border-[0.2px] border-solid border-[#e9a031] bg-white/19 px-[34px] py-[12px] text-[18px] font-medium whitespace-nowrap text-white transition-[color,background-color,border-color,font-weight] duration-300 ease-in-out hover:bg-transparent hover:font-bold hover:text-gold"
         >
           Enquire Now
         </a>

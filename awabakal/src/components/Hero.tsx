@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useCallback, useEffect, useState, type ReactNode } from "react";
+import CtaButton from "@/components/ui/CtaButton";
 import Dot from "@/components/ui/Dot";
 
 type Slide = {
@@ -157,19 +158,13 @@ export default function Hero() {
           </p>
 
           {SLIDES[index].cta && (
-            <a
+            <CtaButton
+              variant="solid"
               href={SLIDES[index].href}
-              className="mt-[36px] inline-flex items-center gap-[10px] rounded-[100px] bg-brand px-[26px] py-[13px] font-dm text-[16px] font-medium text-white transition-colors hover:bg-brand-light"
+              className="mt-[36px]"
             >
               {SLIDES[index].cta}
-              <Image
-                src="/figma/about/arrow.svg"
-                alt=""
-                width={19}
-                height={12}
-                className="h-[12px] w-[19px] brightness-0 invert"
-              />
-            </a>
+            </CtaButton>
           )}
         </div>
       </div>

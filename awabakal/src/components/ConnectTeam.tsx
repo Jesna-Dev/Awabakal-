@@ -1,4 +1,5 @@
 import Image from "next/image";
+import CtaButton from "@/components/ui/CtaButton";
 import VectorPortrait from "@/components/ui/VectorPortrait";
 
 /** The photo used by both the large and the small blob. */
@@ -8,8 +9,12 @@ export default function ConnectTeam() {
   return (
     <section
       id="contact"
-      // background comes from the shared wrapper in page.tsx
       className="px-6 pb-24 font-cambay lg:px-[90px] lg:pb-[120px]"
+      style={{
+        // continues the FAQ section's wash so the two read as one surface
+        backgroundImage:
+          "linear-gradient(180deg, #fdf3ee 0%, #ffffff 22%, #ffffff 62%, #f6ecf6 100%)",
+      }}
     >
       {/* Figma: 1740x610 banner. `cta image.png` is exported at exactly that
           size, so the card keeps the same ratio and the artwork lines up at
@@ -35,20 +40,13 @@ export default function ConnectTeam() {
             We&apos;re Always Here To Listen And Support Our Community.
           </p>
 
-          <a
+          <CtaButton
+            variant="white"
             href="#contact"
-            className="group mt-[28px] inline-flex items-center gap-[10px] rounded-[100px] bg-white px-[24px] py-[15px] font-dm text-[15px] font-medium text-brand transition-colors duration-300 ease-in-out hover:bg-transparent hover:text-white lg:mt-[40px]"
+            className="mt-[28px] lg:mt-[40px]"
           >
             Get In Touch
-            <Image
-              src="/figma/about/arrow.svg"
-              alt=""
-              aria-hidden
-              width={19}
-              height={12}
-              className="h-[12px] w-[19px] transition-[filter] duration-300 ease-in-out group-hover:brightness-0 group-hover:invert"
-            />
-          </a>
+          </CtaButton>
         </div>
 
         {/* ── portraits, both masked with the Vector 2542 blob ──────── */}
