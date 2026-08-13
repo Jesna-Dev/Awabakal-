@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useCallback, useEffect, useState, type ReactNode } from "react";
 import CtaButton from "@/components/ui/CtaButton";
-import Dot from "@/components/ui/Dot";
+import SectionLabel from "@/components/ui/SectionLabel";
 
 type Slide = {
   src: string;
@@ -85,36 +85,33 @@ const SLIDES: Slide[] = [
   },
 ];
 
-const SLIDE_MS = 6000;
+const SLIDE_MS = 3500;
 
 export default function Hero() {
   const [index, setIndex] = useState(0);
-  const [paused, setPaused] = useState(false);
 
   const go = useCallback((next: number) => {
     setIndex(((next % SLIDES.length) + SLIDES.length) % SLIDES.length);
   }, []);
 
+  // the carousel always advances on its own — hovering no longer holds it
   useEffect(() => {
-    if (paused) return;
     const id = setTimeout(() => go(index + 1), SLIDE_MS);
     return () => clearTimeout(id);
-  }, [index, paused, go]);
+  }, [index, go]);
 
   const next = SLIDES[(index + 1) % SLIDES.length];
 
   return (
     <section
       className="relative isolate h-[980px] w-full overflow-hidden bg-[#d9d9d9] font-cambay"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
       aria-roledescription="carousel"
       aria-label="Awabakal services"
     >
       {SLIDES.map((slide, i) => (
         <div
           key={i}
-          className={`absolute inset-0 transition-opacity duration-700 ease-out ${i === index ? "opacity-100" : "opacity-0"
+          className={`absolute inset-0 transition-opacity duration-400 ease-out ${i === index ? "opacity-100" : "opacity-0"
             }`}
           aria-hidden={i !== index}
         >
@@ -143,10 +140,9 @@ export default function Hero() {
       <div className="absolute inset-y-0 left-0 flex w-full max-w-[741px] items-center px-6 lg:px-[90px]">
         <div key={index} className="hero-enter flex flex-col items-start">
           {SLIDES[index].eyebrow && (
-            <span className="mb-[28px] inline-flex items-center gap-[10px] rounded-[100px] border border-solid border-[#561358] bg-[#918F91] px-[18px] py-[8px] text-[14px] text-[#561358]">
-              <Dot size={12} />
-              {SLIDES[index].eyebrow}    
-            </span>
+            <SectionLabel className="mb-[28px] bg-[#918F91]">
+              {SLIDES[index].eyebrow}
+            </SectionLabel>
           )}
 
           <h1 className="max-w-[560px] text-[56px] leading-[1.12] font-normal text-white sm:text-[68px]">
@@ -202,7 +198,6 @@ export default function Hero() {
                     i === index
                       ? {
                         animation: `hero-progress ${SLIDE_MS}ms linear forwards`,
-                        animationPlayState: paused ? "paused" : "running",
                       }
                       : { width: i < index ? "100%" : "0%" }
                   }

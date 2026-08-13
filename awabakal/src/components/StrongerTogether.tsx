@@ -1,4 +1,6 @@
-const partners = ["Deloitte.", "Partner 2", "Partner 3", "Partner 4"];
+import SectionLabel from "@/components/ui/SectionLabel";
+
+const partners =["Deloitte.", "Partner 2", "Partner 3", "Partner 4"];
 
 export default function StrongerTogether() {
   return (
@@ -24,10 +26,9 @@ export default function StrongerTogether() {
       <div className="mx-auto grid max-w-[1440px] items-center gap-16 lg:grid-cols-2 lg:gap-[80px]">
         {/* ── left: badge, title, copy ────────────────────────────── */}
         <div>
-          <span className="mb-[40px] inline-flex items-center gap-[10px] rounded-full border border-white/60 px-[22px] py-[10px] text-[15px] text-white">
-            <span className="size-[8px] rounded-full bg-white" aria-hidden />
+          <SectionLabel tone="dark" className="mb-[40px]">
             Partnership With
-          </span>
+          </SectionLabel>
 
           <h2 className="text-[48px] font-normal leading-[1.15] text-white lg:text-[64px]">
             Stronger Together

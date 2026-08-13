@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import SectionLabel from "@/components/ui/SectionLabel";
 
 const faqs = [
   {
@@ -56,10 +57,7 @@ export default function FAQ() {
 
       {/* ── heading ─────────────────────────────────────────────────── */}
       <div className="flex flex-col items-center text-center">
-        <span className="mb-[26px] inline-flex items-center gap-[8px] rounded-[100px] border border-solid border-brand-light/40 px-[16px] py-[6px] text-[13px] text-brand">
-          <span className="size-[7px] rounded-full bg-accent" aria-hidden />
-          FAQ
-        </span>
+        <SectionLabel className="mb-[26px]">FAQ</SectionLabel>
 
         <h2 className="max-w-[520px] text-[36px] font-normal leading-[1.25] text-brand lg:text-[64px]">
           Frequently Asked Questions

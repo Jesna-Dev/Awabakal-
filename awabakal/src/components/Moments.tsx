@@ -1,5 +1,6 @@
 import Image from "next/image";
 import CtaButton from "@/components/ui/CtaButton";
+import SectionLabel from "@/components/ui/SectionLabel";
 
 type Tile =
   | { kind: "photo"; src: string; alt: string }
@@ -53,10 +54,9 @@ export default function Moments() {
       {/* ── heading ─────────────────────────────────────────────────── */}
       <div className="flex flex-wrap items-end justify-between gap-8 px-6 lg:px-[79px]">
         <div>
-          <span className="mb-[28px] inline-flex items-center gap-[10px] rounded-[100px] border border-solid border-white/70 px-[18px] py-[8px] text-[15px] text-white">
-            <span className="size-[10px] rounded-full bg-white" aria-hidden />
+          <SectionLabel tone="dark" className="mb-[28px]">
             Gallery
-          </span>
+          </SectionLabel>
 
           <h2 className="flex flex-wrap items-center gap-x-6 text-[52px] font-normal leading-[1.1] text-white lg:text-[72px]">
             Moments

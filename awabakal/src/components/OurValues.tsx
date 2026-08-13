@@ -48,9 +48,6 @@ const values: Value[] = [
 
 const RING = 458.916;
 
-/** Staggers the rings' float so they don't rise and fall in lockstep. */
-const FLOAT_DELAYS = ["", "float-delay-1", "float-delay-2"];
-
 export default function OurValues() {
   return (
     <section className="relative isolate overflow-hidden bg-brand px-6 py-24 font-cambay lg:px-[60px]">
@@ -72,15 +69,13 @@ export default function OurValues() {
       </h2>
 
       <div className="mx-auto flex max-w-[1465px] flex-col gap-[48px] md:flex-row md:items-start">
-        {values.map(({ title, description, art }, i) => (
+        {values.map(({ title, description, art }) => (
           <div
             key={title}
             className="flex flex-1 flex-col items-center gap-[62.442px]"
           >
             {/* ring + artwork, scaled together so proportions hold */}
-            <div
-              className={`float-drift float-slow relative aspect-square w-full max-w-[458.916px] ${FLOAT_DELAYS[i % FLOAT_DELAYS.length]}`}
-            >
+            <div className="relative aspect-square w-full max-w-[458.916px]">
               <Image src="/figma/values/ring.svg" alt="" fill className="object-contain" />
               <Image
                 src={art.src}

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import CtaButton from "@/components/ui/CtaButton";
+import SectionLabel from "@/components/ui/SectionLabel";
 
 export default function WeEmpower() {
   return (
@@ -18,7 +19,7 @@ export default function WeEmpower() {
       {/* seated-figures outline hugging the right edge — 236x837 native, drawn
           at half scale on its own ratio so the whole element shows uncropped */}
       <Image
-        src="/People Sitting Outline Element .png"
+        src="/People Sitting Outline Element .png"  
         alt=""
         aria-hidden
         width={236}
@@ -29,10 +30,7 @@ export default function WeEmpower() {
       <div className="mx-auto grid max-w-[1440px] items-center gap-12 lg:grid-cols-[minmax(0,1fr)_438px_minmax(0,1fr)] lg:gap-[70px]">
         {/* ── left: badge + title ─────────────────────────────────── */}
         <div>
-          <span className="mb-[70px] inline-flex items-center gap-[10px] rounded-full border border-brand-light px-[22px] py-[10px] text-[16px] text-brand">
-            <span className="size-[10px] rounded-full bg-brand" aria-hidden />
-            Awabakal Enterprise
-          </span>
+          <SectionLabel className="mb-[70px]">Awabakal Enterprise</SectionLabel>
 
           <h2 className="flex max-w-[360px] flex-wrap items-start gap-x-5 text-[56px] font-bold leading-[1.15] text-brand lg:text-[80px]">
             <span>We</span>

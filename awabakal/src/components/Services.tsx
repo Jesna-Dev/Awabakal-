@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import SectionLabel from "@/components/ui/SectionLabel";
 
 type Service = {
   title: string;
@@ -203,22 +204,13 @@ export default function Services() {
         height={480}
         unoptimized
         priority={false}
-        className="pointer-events-none absolute top-[4%] right-[4%] h-[300px] w-[300px] select-none opacity-50 mix-blend-multiply lg:h-[440px] lg:w-[440px]"
+        className="pointer-events-none absolute top-[4%] right-[4%] h-[300px] w-[300px] select-none opacity-10 mix-blend-multiply lg:h-[440px] lg:w-[440px]"
       />
 
       <div className="relative pt-20 pb-16">
         {/* flush left, matching the hero's left inset on the landing page */}
         <div className="px-6 lg:px-[90px]">
-          <span className="mb-[28px] inline-flex items-center gap-[10px] rounded-[100px] border border-solid border-[#561358] bg-transparent px-[18px] py-[8px] text-[14px] text-[#561358]">
-            <Image
-              src="/Vector 2534.png"
-              alt=""
-              width={12}
-              height={12}
-              className="h-[12px] w-[12px] object-contain"
-            />
-            Service
-          </span>
+          <SectionLabel className="mb-[28px]">Service</SectionLabel>
 
           <h2 className="mb-[36px] max-w-[560px] text-[56px] leading-[1.12] font-normal text-brand sm:text-[68px]">
             Our Services
